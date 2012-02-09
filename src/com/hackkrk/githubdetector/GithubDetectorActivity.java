@@ -1,6 +1,9 @@
 package com.hackkrk.githubdetector;
 
+import com.hackkrk.githubdetector.api.LoginActivity;
+
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 public class GithubDetectorActivity extends Activity {
@@ -9,5 +12,7 @@ public class GithubDetectorActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
     }
 }

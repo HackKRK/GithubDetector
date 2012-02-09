@@ -3,8 +3,8 @@ package com.hackkrk.githubdetector.api;
 import java.net.MalformedURLException;
 
 public class Configuration {
-  public static java.net.URL getServerURL() throws MalformedURLException
+  public static String getServerURL() throws MalformedURLException
   {
-    return new java.net.URL("http://itdet.com");
+    return "http://10.0.1.74:8080/com.hackkrk.githubdetector/rest/gd";
   }
 }

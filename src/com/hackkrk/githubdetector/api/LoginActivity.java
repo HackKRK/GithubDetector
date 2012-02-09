@@ -2,8 +2,6 @@ package com.hackkrk.githubdetector.api;
 
 import com.hackkrk.githubdetector.R;
 
-import org.apache.http.params.BasicHttpParams;
-import org.apache.http.params.HttpParams;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -16,9 +14,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-
-import java.net.URI;
-import java.net.URL;
 
 public class LoginActivity extends Activity {
   

@@ -1,5 +1,6 @@
 package com.hackkrk.githubdetector.api;
 
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
@@ -34,9 +35,9 @@ public class JsonClient {
     return client;
   }
 
-  public String create(String token, URL url, String body) {
+  public String create(String token, String url, String body) {
 
-    HttpPost post = new HttpPost(url.toString());
+    HttpPost post = new HttpPost(url);
     try {
       post.setEntity(new StringEntity(body));
     } catch (UnsupportedEncodingException e1) {
@@ -47,8 +48,10 @@ public class JsonClient {
     HttpClient httpClient = getHttpClient();
 
     try {
+      post.setHeader("Content-Type", "application/json");
       HttpResponse execute = httpClient.execute(post);
-      return EntityUtils.toString(execute.getEntity());
+      HttpEntity entity = execute.getEntity();
+      return EntityUtils.toString(entity);
 
     } catch (ClientProtocolException e) {
       // TODO Auto-generated catch block
@@ -63,17 +66,19 @@ public class JsonClient {
 
   } // POST
 
-  public String read(String token, URL url, HttpParams params) {
+  public String read(String token, String url, HttpParams params) {
     
-    HttpGet get = new HttpGet(url.toString());
+    HttpGet get = new HttpGet(url);
     
     get.setParams(params);
     
     HttpClient httpClient = getHttpClient();
 
     try {
+      get.addHeader("content-type", "application/json");
       HttpResponse execute = httpClient.execute(get);
-      return EntityUtils.toString(execute.getEntity());
+      HttpEntity entity = execute.getEntity();
+      return EntityUtils.toString(entity);
 
     } catch (ClientProtocolException e) {
       // TODO Auto-generated catch block

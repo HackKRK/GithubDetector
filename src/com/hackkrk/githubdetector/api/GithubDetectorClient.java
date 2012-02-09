@@ -45,7 +45,7 @@ public class GithubDetectorClient {
     String body = jsonBody.toString();
 
     try {
-      return client.create(null, Configuration.getServerURL(), body);
+      return client.create(null, Configuration.getServerURL() + "/login", body);
     } catch (MalformedURLException e) {
       // TODO Auto-generated catch block
       e.printStackTrace();
@@ -82,7 +82,7 @@ public class GithubDetectorClient {
     params.setDoubleParameter("lng", lng);
     params.setDoubleParameter("radius", radius);
 
-    String geeksInString = client.read(getToken(), Configuration.getServerURL(), params);
+    String geeksInString = client.read(getToken(), Configuration.getServerURL() , params);
 
     JSONArray userArray = new JSONArray(geeksInString);
 
