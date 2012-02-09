@@ -1,5 +1,7 @@
 package com.hackkrk.githubdetector.location;
 
+import com.hackkrk.githubdetector.api.GithubDetectorClient;
+
 import android.app.Service;
 import android.content.Intent;
 import android.location.Location;
@@ -133,8 +135,8 @@ public class LocationService extends Service {
   }
 
   public void checkIn(Location location) {
-    // TODO Auto-generated method stub
-
+    GithubDetectorClient client = GithubDetectorClient.getInstance(this);
+    client.checkIn(location.getLatitude(), location.getLongitude(), "jestem tu");
   }
 
 }

@@ -11,7 +11,6 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,27 +52,30 @@ public class GithubDetectorClient {
     return null;
   }
 
-  public void checkIn(float lng, float lat, String text) throws JSONException {
+  public void checkIn(double lat, double lng, String text) {
     JsonClient client = JsonClient.getInstance();
     try {
 
       String token = getToken();
 
       JSONObject jsonBody = new JSONObject();
-      jsonBody.put("lat", lat);
-      jsonBody.put("lng", lng);
-      jsonBody.put("text", text);
+      try {
+        jsonBody.put("lat", lat);
+        jsonBody.put("lng", lng);
+        jsonBody.put("text", text);
+        String body = jsonBody.toString();
 
-      String body = jsonBody.toString();
+        client.create(token, Configuration.getServerURL(sContext), body);
 
-      client.create(token, Configuration.getServerURL(sContext), body);
+      } catch (JSONException e) {
+      }
     } catch (MalformedURLException e) {
       // TODO Auto-generated catch block
       e.printStackTrace();
     }
   }
 
-  public List<GitUser> geeks(float lng, float lat, float radius) throws JSONException,
+  public List<GitUser> geeks(double lat, double lng, double radius) throws JSONException,
       MalformedURLException {
     JsonClient client = JsonClient.getInstance();
 
