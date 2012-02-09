@@ -45,7 +45,7 @@ public class GithubDetectorClient {
     String body = jsonBody.toString();
 
     try {
-      return client.create(null, Configuration.getServerURL() + "/login", body);
+      return client.create(null, Configuration.getServerURL(sContext) + "/login", body);
     } catch (MalformedURLException e) {
       // TODO Auto-generated catch block
       e.printStackTrace();
@@ -66,7 +66,7 @@ public class GithubDetectorClient {
 
       String body = jsonBody.toString();
 
-      client.create(token, Configuration.getServerURL(), body);
+      client.create(token, Configuration.getServerURL(sContext), body);
     } catch (MalformedURLException e) {
       // TODO Auto-generated catch block
       e.printStackTrace();
