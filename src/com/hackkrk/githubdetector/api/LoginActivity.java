@@ -59,7 +59,7 @@ public class LoginActivity extends Activity {
       String loginResult = null;
       try {
         loginResult = githubDetectorClient.login(params[0], params[1]);
-        
+
         JSONObject loginResultObject = new JSONObject(loginResult);
 
         SharedPreferences prefs = getPreferences(MODE_PRIVATE);
@@ -76,7 +76,7 @@ public class LoginActivity extends Activity {
       } catch (JSONException e) {
         e.printStackTrace();
       } finally {
-       
+
       }
       return null;
     }
@@ -84,7 +84,7 @@ public class LoginActivity extends Activity {
     @Override
     protected void onPostExecute(String result) {
       super.onPostExecute(result);
-      Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG);
+      Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
     }
 
   }
