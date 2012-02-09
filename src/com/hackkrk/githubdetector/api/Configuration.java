@@ -9,26 +9,24 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Configuration {
-  
-  static Map<String, String> backendToUrl = new HashMap<String, String>(){
+
+  public static Map<String, String> backendToUrl = new HashMap<String, String>() {
     {
-      backendToUrl.put("J2EE", "http://10.0.1.74:8080/com.hackkrk.githubdetector/rest/gd");
-      backendToUrl.put("Ruby", "http://10.0.1.74:8080/com.hackkrk.githubdetector/rest/gd");
-      backendToUrl.put("Python", "http://10.0.1.74:8080/com.hackkrk.githubdetector/rest/gd");
-      backendToUrl.put("Node.js", "http://10.0.1.74:8080/com.hackkrk.githubdetector/rest/gd");
+      backendToUrl
+          .put("J2EE", "http://10.0.1.74:8080/com.hackkrk.githubdetector/rest/gd");
+      backendToUrl
+          .put("Ruby", "http://10.0.1.74:8080/com.hackkrk.githubdetector/rest/gd");
+      backendToUrl.put("Python",
+          "http://10.0.1.74:8080/com.hackkrk.githubdetector/rest/gd");
+      backendToUrl.put("Node.js",
+          "http://10.0.1.74:8080/com.hackkrk.githubdetector/rest/gd");
     }
   };
-  
-  
-  
-  public static String getServerURL(Context context) throws MalformedURLException
-  {
-    
-    
-    
+
+  public static String getServerURL(Context context) throws MalformedURLException {
     return backendToUrl.get(getBackend(context));
   }
-  
+
   private static String getBackend(Context context) {
     SharedPreferences defaultSharedPreferences = PreferenceManager
         .getDefaultSharedPreferences(context);

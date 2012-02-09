@@ -82,7 +82,8 @@ public class GithubDetectorClient {
     params.setDoubleParameter("lng", lng);
     params.setDoubleParameter("radius", radius);
 
-    String geeksInString = client.read(getToken(), Configuration.getServerURL() , params);
+    String geeksInString = client.read(getToken(), Configuration.getServerURL(sContext),
+        params);
 
     JSONArray userArray = new JSONArray(geeksInString);
 
