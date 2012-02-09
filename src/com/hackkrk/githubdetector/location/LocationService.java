@@ -20,13 +20,22 @@ public class LocationService extends Service {
   public Location mBestLocation;
 
   @Override
-  public IBinder onBind(Intent intent) {
+  public int onStartCommand(Intent intent, int flags, int startId) {
+
+    Log.d(TAG, "starting location service");
 
     LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
     LocationListener locationListener = new SimpleLocationListener();
-    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5 * MINUTE, 50,
+    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MINUTE, 1,
+        locationListener);
+    locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, MINUTE, 1,
         locationListener);
 
+    return START_STICKY;
+  }
+
+  @Override
+  public IBinder onBind(Intent intent) {
     return null;
   }
 
@@ -41,7 +50,6 @@ public class LocationService extends Service {
             TAG,
             "Current best location: " + location.getLatitude() + " "
                 + location.getLongitude());
-        Log.d(TAG, "Current best location: " + location.toString());
 
         mBestLocation = location;
 
