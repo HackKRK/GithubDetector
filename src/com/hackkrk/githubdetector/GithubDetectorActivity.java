@@ -12,6 +12,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.widget.Toast;
 
 public class GithubDetectorActivity extends Activity {
   /** Called when the activity is first created. */
@@ -19,7 +20,6 @@ public class GithubDetectorActivity extends Activity {
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.main);
-    Intent intent = new Intent(this, LoginActivity.class);
 
     if (getBackend() == null) {
       final String[] items = { "J2ee", "Ruby", "Python", "Node.js" };
@@ -31,15 +31,21 @@ public class GithubDetectorActivity extends Activity {
           SharedPreferences defaultSharedPreferences = PreferenceManager
               .getDefaultSharedPreferences(getApplicationContext());
           Editor editor = defaultSharedPreferences.edit();
-          editor.putString(Preferences.BACKEND, items[item]);
+          String selectedBackend = items[item];
+          editor.putString(Preferences.BACKEND, selectedBackend);
+          Toast.makeText(getApplicationContext(), "Selected " + selectedBackend
+              + " backend", Toast.LENGTH_LONG);
+          editor.commit();
+          
+            checkIfloggedInElseAskForCredentials();
         }
       });
       AlertDialog alert = builder.create();
       alert.show();
+    } else {
+      checkIfloggedInElseAskForCredentials();
     }
 
-    startActivity(intent);
-    startService(new Intent(this, LocationService.class));
   }
 
   private String getBackend() {
@@ -48,4 +54,17 @@ public class GithubDetectorActivity extends Activity {
     String token = defaultSharedPreferences.getString(Preferences.BACKEND, null);
     return token;
   }
+
+  private void checkIfloggedInElseAskForCredentials() {
+    SharedPreferences defaultSharedPreferences = PreferenceManager
+        .getDefaultSharedPreferences(getApplicationContext());
+    if (defaultSharedPreferences.getString(Preferences.TOKEN, null) == null) {
+      final Intent intent = new Intent(this, LoginActivity.class);
+      startActivity(intent);
+    } else {
+      startService(new Intent(this, LocationService.class));
+    }
+
+  }
+
 }
