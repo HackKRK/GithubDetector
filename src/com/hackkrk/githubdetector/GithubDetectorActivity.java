@@ -21,8 +21,8 @@ public class GithubDetectorActivity extends Activity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.main);
 
-    if (getBackend() == null) {
-      final String[] items = { "J2ee", "Ruby", "Python", "Node.js" };
+//    if (getBackend() == null) {
+      final String[] items = { "J2EE", "Ruby", "Python", "Node.js" };
 
       AlertDialog.Builder builder = new AlertDialog.Builder(this);
       builder.setTitle("Pick a backend");
@@ -42,9 +42,9 @@ public class GithubDetectorActivity extends Activity {
       });
       AlertDialog alert = builder.create();
       alert.show();
-    } else {
-      checkIfloggedInElseAskForCredentials();
-    }
+//    } else {
+//      checkIfloggedInElseAskForCredentials();
+//    }
 
   }
 

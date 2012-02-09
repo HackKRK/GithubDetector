@@ -16,13 +16,14 @@ public class Configuration {
     backendToUrl.put("J2EE", "http://10.0.1.74:8080/com.hackkrk.githubdetector/rest/gd");
     backendToUrl.put("Ruby", "http://10.0.1.74:8080/com.hackkrk.githubdetector/rest/gd");
     backendToUrl
-        .put("Python", "http://10.0.1.74:8080/com.hackkrk.githubdetector/rest/gd");
+        .put("Python", "http://10.0.1.51:8000");
     backendToUrl.put("Node.js",
         "http://10.0.1.74:8080/com.hackkrk.githubdetector/rest/gd");
   }
 
   public static String getServerURL(Context context) throws MalformedURLException {
-    return backendToUrl.get(getBackend(context));
+    String backend = getBackend(context);
+    return backendToUrl.get(backend);
   }
 
   private static String getBackend(Context context) {

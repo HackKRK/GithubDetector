@@ -12,6 +12,8 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.HttpParams;
 import org.apache.http.util.EntityUtils;
 
+import android.util.Log;
+
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
@@ -51,7 +53,9 @@ public class JsonClient {
       post.setHeader("Content-Type", "application/json");
       HttpResponse execute = httpClient.execute(post);
       HttpEntity entity = execute.getEntity();
-      return EntityUtils.toString(entity);
+      String string = EntityUtils.toString(entity);
+      Log.d("backend", string);
+      return string;
 
     } catch (ClientProtocolException e) {
       // TODO Auto-generated catch block
