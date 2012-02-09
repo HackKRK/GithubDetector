@@ -1,4 +1,4 @@
-package com.hackkrk.githubdetector;
+package com.hackkrk.githubdetector.ui;
 
 import android.support.v4.app.Fragment;
 

@@ -1,11 +1,15 @@
-package com.hackkrk.githubdetector;
+package com.hackkrk.githubdetector.ui;
+
+import java.util.List;
+
+import com.hackkrk.githubdetector.R;
+import com.hackkrk.githubdetector.api.GitUser;
 
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 
 public class UsersListFragment extends ListFragment {
 	
@@ -18,10 +22,9 @@ public class UsersListFragment extends ListFragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		
-		String[] items = new String[] {"Item 1", "Item 2", "Item 3", "Item 4", "Item 5"};
-		setListAdapter(new ArrayAdapter<String>(getActivity(),
-                R.layout.user_list_item,
-                items));
+	}
+	
+	public void setUsersList(List<GitUser> users) {
+		setListAdapter(new UsersListAdapter(getActivity(), users));
 	}
 }
