@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.text.TextUtils;
 
 import java.net.MalformedURLException;
 import java.util.ArrayList;
@@ -58,16 +59,18 @@ public class GithubDetectorClient {
 
       String token = getToken();
 
-      JSONObject jsonBody = new JSONObject();
-      try {
-        jsonBody.put("lat", lat);
-        jsonBody.put("lng", lng);
-        jsonBody.put("text", text);
-        String body = jsonBody.toString();
+      if (!TextUtils.isEmpty(token)) {
+        JSONObject jsonBody = new JSONObject();
+        try {
+          jsonBody.put("lat", lat);
+          jsonBody.put("lng", lng);
+          jsonBody.put("text", text);
+          String body = jsonBody.toString();
 
-        client.create(token, Configuration.getServerURL(sContext), body);
+          client.create(token, Configuration.getServerURL(sContext), body);
 
-      } catch (JSONException e) {
+        } catch (JSONException e) {
+        }
       }
     } catch (MalformedURLException e) {
       // TODO Auto-generated catch block

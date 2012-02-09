@@ -21,30 +21,30 @@ public class GithubDetectorActivity extends Activity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.main);
 
-//    if (getBackend() == null) {
-      final String[] items = { "J2EE", "Ruby", "Python", "Node.js" };
+    //    if (getBackend() == null) {
+    final String[] items = { "J2EE", "Ruby", "Python", "Node.js" };
 
-      AlertDialog.Builder builder = new AlertDialog.Builder(this);
-      builder.setTitle("Pick a backend");
-      builder.setItems(items, new DialogInterface.OnClickListener() {
-        public void onClick(DialogInterface dialog, int item) {
-          SharedPreferences defaultSharedPreferences = PreferenceManager
-              .getDefaultSharedPreferences(getApplicationContext());
-          Editor editor = defaultSharedPreferences.edit();
-          String selectedBackend = items[item];
-          editor.putString(Preferences.BACKEND, selectedBackend);
-          Toast.makeText(getApplicationContext(), "Selected " + selectedBackend
-              + " backend", Toast.LENGTH_LONG);
-          editor.commit();
-          
-            checkIfloggedInElseAskForCredentials();
-        }
-      });
-      AlertDialog alert = builder.create();
-      alert.show();
-//    } else {
-//      checkIfloggedInElseAskForCredentials();
-//    }
+    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    builder.setTitle("Pick a backend");
+    builder.setItems(items, new DialogInterface.OnClickListener() {
+      public void onClick(DialogInterface dialog, int item) {
+        SharedPreferences defaultSharedPreferences = PreferenceManager
+            .getDefaultSharedPreferences(getApplicationContext());
+        Editor editor = defaultSharedPreferences.edit();
+        String selectedBackend = items[item];
+        editor.putString(Preferences.BACKEND, selectedBackend);
+        Toast.makeText(getApplicationContext(), "Selected " + selectedBackend
+            + " backend", Toast.LENGTH_LONG);
+        editor.commit();
+
+        checkIfloggedInElseAskForCredentials();
+      }
+    });
+    AlertDialog alert = builder.create();
+    alert.show();
+    //    } else {
+    //      checkIfloggedInElseAskForCredentials();
+    //    }
 
   }
 
