@@ -4,8 +4,12 @@ import com.hackkrk.githubdetector.R;
 
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpParams;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -53,7 +57,23 @@ public class LoginActivity extends Activity {
     @Override
     protected Void doInBackground(String... params) {
       
-       // TODO Auto-generated method stub
+      GithubDetectorClient githubDetectorClient = GithubDetectorClient.getInstance(getApplicationContext());
+      try {
+        String loginResult = githubDetectorClient.login(params[0], params[1]);
+        JSONObject loginResultObject = new JSONObject(loginResult);
+        
+        SharedPreferences prefs = getPreferences(MODE_PRIVATE);
+        
+        Editor editor = prefs.edit();
+
+        editor.putString(Preferences.TOKEN, loginResultObject.getString("token"));
+        editor.putString(Preferences.GRAVATAR_URL, loginResultObject.getString("gravatar_url"));
+        
+        editor.commit();
+      
+      } catch (JSONException e) {
+        e.printStackTrace();
+      }
       return null;
     }
     
